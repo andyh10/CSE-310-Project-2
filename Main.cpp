@@ -141,8 +141,21 @@ int main(){
 
     // Part 2 ------------------------------------------------------------------------------------------
 
+    //make array of odd degree vertices in G
+    int O[numOfVertices];
 
+    //Print out The odd degree vertices in G
+    cout << "The odd degree vertices in G:\nO = { ";
 
+    for(int i=0; i < numOfVertices; i++)
+    {
+        if(numOfEdges%2 == 0)
+        {
+            cout << O[i]<< " ";
+        }
+    }
+
+    cout << " }";
 
     // Part 3 ------------------------------------------------------------------------------------------
 
