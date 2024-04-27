@@ -138,24 +138,32 @@ int main(){
         }
         cout << "\n";
     }
+    cout << "\n";
 
     // Part 2 ------------------------------------------------------------------------------------------
 
-    //make array of odd degree vertices in G
-    int O[numOfVertices];
-
-    //Print out The odd degree vertices in G
-    cout << "The odd degree vertices in G:\nO = { ";
-
-    for(int i=0; i < numOfVertices; i++)
+    int vDegrees[numOfVertices] = {0};
+    
+    Node* temp1 = Graph.head;
+    while(temp1->next != nullptr)
     {
-        if(numOfEdges%2 == 0)
-        {
-            cout << O[i]<< " ";
-        }
-    }
+        vDegrees[temp1->data->startVert - 1] += 1;
+        vDegrees[temp1->data->endVert   - 1] += 1;
 
-    cout << " }";
+        temp1 = temp1->next;
+    }
+    
+    cout << "The odd degree vertices in G:" << "\n";
+    cout << "O = { ";
+    for(int i = 0; i < numOfVertices; i++)
+    {
+        if(vDegrees[i] % 2 == 1)
+        {
+            cout << i + 1 << " ";
+        }
+    } 
+    cout << "}\n"; 
+
 
     // Part 3 ------------------------------------------------------------------------------------------
 
