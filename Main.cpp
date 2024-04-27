@@ -128,7 +128,7 @@ int main(){
     }
 
 
-    // Printing out the matrix
+    // Print out the matrix
     cout << "The adjacency matrix of G:" << "\n";
     for(int i = 0; i < numOfVertices; i++)
     {
@@ -144,8 +144,9 @@ int main(){
 
     int vDegrees[numOfVertices] = {0};
     
+    // Make an array of each vertices' degrees
     Node* temp1 = Graph.head;
-    while(temp1->next != nullptr)
+    while(temp1 != nullptr)
     {
         vDegrees[temp1->data->startVert - 1] += 1;
         vDegrees[temp1->data->endVert   - 1] += 1;
@@ -153,6 +154,7 @@ int main(){
         temp1 = temp1->next;
     }
     
+    // Print out only the odd ones
     cout << "The odd degree vertices in G:" << "\n";
     cout << "O = { ";
     for(int i = 0; i < numOfVertices; i++)
