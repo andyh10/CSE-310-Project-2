@@ -72,6 +72,13 @@ void LinkedList::printList()
     }
 }
 
+int* dijkstra(int startVal, int* aMatrix)
+{
+    // startVal - starting value of Dijkstra algorithm
+    // aMatrix  - adjacency matrix for actual use of Dijkstra, used for determining the structure of the graph
+
+    
+}
 
 int main(){
 
@@ -170,7 +177,15 @@ int main(){
     // Part 3 ------------------------------------------------------------------------------------------
 
 
+    for(int i = 0; i < numOfVertices; i++)
+    {
+        if(vDegrees[i] % 2 == 1)
+        {
+            // Input Dijkstra algorithm here for vDegrees[i], but print out for i + 1
 
+        }
+    } 
+    cout << "\n";
     
     return 0;
 }
