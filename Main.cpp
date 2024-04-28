@@ -184,9 +184,9 @@ int main(){
     dist[startVal - 1] = 0;
 
     // Loop through all vertices
-    for (int count = 0; count < numOfVertices - 1; count++)
+    for (int i = 0; i < numOfVertices - 1; i++)
     {
-        // Find the vertex with the minimum distance value from the set of vertices not yet processed
+        // Find the vertex with the minimum distance value from the set of vertices not yet visited
         int minDist = INF;
         int minIndex = -1;
         for (int v = 0; v < numOfVertices; v++)
