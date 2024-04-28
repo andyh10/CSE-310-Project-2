@@ -1,5 +1,6 @@
 #include "Edge.h"
 #include <iostream>
+#include <limits>
 using namespace std;
 
 struct Node
@@ -59,7 +60,7 @@ void LinkedList::printList()
 {
     Node* temp = head;
 
-    if(head = nullptr)
+    if(head == nullptr)
     {
         cout << " ";
         return;
@@ -70,6 +71,14 @@ void LinkedList::printList()
         cout << temp->data->startVert << " " << temp->data->endVert;
         temp = temp->next;
     }
+}
+
+int* dijkstra(int startVal, int* aMatrix)
+{
+    // startVal - starting value of Dijkstra algorithm
+    // aMatrix  - adjacency matrix for actual use of Dijkstra, used for determining the structure of the graph
+
+    
 }
 
 int main(){
@@ -168,6 +177,17 @@ int main(){
 
     // Part 3 ------------------------------------------------------------------------------------------
 
+    /*
+    for(int i = 0; i < numOfVertices; i++)
+    {
+        if(vDegrees[i] % 2 == 1)
+        {
+            // Input Dijkstra algorithm here for vDegrees[i], but print out for i + 1
+
+        }
+    } 
+    cout << "\n"; */
+    
     //Value of the starting vertex
     int startVal;     
     // Array to store the shortest distances from the startVal vertex to all other vertices
@@ -179,7 +199,7 @@ int main(){
     // Initialize distances to all vertices as infinity and startVal vertex as 0
     for (int i = 0; i < numOfVertices; i++)
     {
-        dist[i] = INF;
+        dist[i] = std::numeric_limits<int>::max();
     }
     dist[startVal - 1] = 0;
 
@@ -187,7 +207,7 @@ int main(){
     for (int i = 0; i < numOfVertices - 1; i++)
     {
         // Find the vertex with the minimum distance value from the set of vertices not yet visited
-        int minDist = INF;
+        int minDist = std::numeric_limits<int>::max();
         int minIndex = -1;
         for (int v = 0; v < numOfVertices; v++)
         {
@@ -204,10 +224,10 @@ int main(){
         // Update dist value of the adjacent vertices of the picked vertex
         for (int v = 0; v < numOfVertices; v++)
         {
-            if (!visited[v] && matrix[minIndex * numOfVertices + v] && dist[minIndex] != INF 
-            && dist[minIndex] + matrix[minIndex * numOfVertices + v] < dist[v])
+            if (!visited[v] && *(matrix[minIndex * numOfVertices + v]) && dist[minIndex] != std::numeric_limits<int>::max() 
+            && dist[minIndex] + *(matrix[minIndex * numOfVertices + v]) < dist[v])
             {
-                dist[v] = dist[minIndex] + matrix[minIndex * numOfVertices + v];
+                dist[v] = dist[minIndex] + *(matrix[minIndex * numOfVertices + v]);
             }
         }
 
@@ -218,15 +238,20 @@ int main(){
         {
             // Input Dijkstra algorithm here for vDegrees[i], but print out for i + 1
             // Print the shortest distances from startVal vertex to all other vertices
-            cout << "Single source shortest path lengths from node " << startVal << end;
+            cout << "Single source shortest path lengths from node " << startVal << "\n";
             cout << i + 1 << ": ";
-            if (dist[i] == INF)
-                cout << INF;
+            if (dist[i] == std::numeric_limits<int>::max())
+            {
+                cout << std::numeric_limits<int>::max();
+            }
             else
+            {
                 cout << dist[i];
-            cout << end;
+            }
+            cout << "\n";
         }
-    } 
+    }
+    }
     cout << "\n";
     
     return 0;
