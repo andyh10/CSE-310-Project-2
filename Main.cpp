@@ -168,7 +168,7 @@ int main(){
     // Part 3 ------------------------------------------------------------------------------------------
     int max = 0x7FFFFFFF;
 
-    for(int i = 0; i < 1 /* CHANGE to numOfVertices */; i++)
+    for(int i = 0; i < numOfVertices; i++)
     {
         if(vDegrees[i] % 2 == 1)
         {
