@@ -1,6 +1,5 @@
 #include "Edge.h"
 #include <iostream>
-#include <limits>
 using namespace std;
 
 struct Node
@@ -71,14 +70,6 @@ void LinkedList::printList()
         cout << temp->data->startVert << " " << temp->data->endVert;
         temp = temp->next;
     }
-}
-
-int* dijkstra(int startVal, int* aMatrix)
-{
-    // startVal - starting value of Dijkstra algorithm
-    // aMatrix  - adjacency matrix for actual use of Dijkstra, used for determining the structure of the graph
-
-    
 }
 
 int main(){
@@ -174,85 +165,82 @@ int main(){
     } 
     cout << "}\n"; 
 
-
     // Part 3 ------------------------------------------------------------------------------------------
+    int max = 0x7FFFFFFF;
 
-    /*
-    for(int i = 0; i < numOfVertices; i++)
+    for(int i = 0; i < 1 /* CHANGE to numOfVertices */; i++)
     {
         if(vDegrees[i] % 2 == 1)
         {
-            // Input Dijkstra algorithm here for vDegrees[i], but print out for i + 1
+            // Dijkstra algorithm for all odd degrees
 
+            int dist[numOfVertices];
+
+            int matrixCopy[numOfVertices][numOfVertices];
+
+            for(int a = 0; a < numOfVertices; a++)
+            {
+                for(int b = 0; b < numOfVertices; b++)
+                {
+                    matrixCopy[a][b] = matrix[a][b];
+                }
+            }
+
+            for(int j = 0; j < numOfVertices; j++)
+            {
+                dist[j] = max;
+            }
+
+            // Array for visited/unvisited nodes
+            bool visited[numOfVertices] = {false};
+
+            // Set starting node distance to 0 and mark as visited
+            dist[i] = 0;
+            visited[i] = true;
+
+            // First dijkstra iteration
+            for(int k = 0; k < numOfVertices; k++)
+            {
+                if(matrixCopy[i][k] == 1)
+                {
+                    matrixCopy[i][k] = 0;
+                    matrixCopy[k][i] = 0;
+                    dist[k] = 1;
+                    visited[k] = true;
+                }
+                
+            }
+
+            // Rest of dijkstra iterations
+            for(int m = 0; m < numOfVertices; m++)
+            {
+                if(visited[m] == true)
+                {
+                    for(int n = 0; n < numOfVertices; n++)
+                    {
+                        if(visited[n] == false && matrixCopy[m][n] == 1)
+                        {
+                            matrixCopy[n][m] = 0;
+                            matrixCopy[m][n] = 0;
+                            dist[n] = dist[m] += 1;
+                            visited[n] = true;
+                        }
+                    }
+                }
+            }
+
+            // Print info
+            cout << "Single source shortest path lengths from node " << i + 1 << "\n";
+            for(int i = 0; i < numOfVertices; i++)
+            {
+                cout << i + 1 << ": " << dist[i] << "\n";
+            }
+            
         }
+
     } 
-    cout << "\n"; */
-    
-    //Value of the starting vertex
-    int startVal;     
-    // Array to store the shortest distances from the startVal vertex to all other vertices
-    int dist[numOfVertices];
 
-    // Array to keep track of visited vertices
-    bool visited[numOfVertices] = {false};
+    cout << "\n"; 
 
-    // Initialize distances to all vertices as infinity and startVal vertex as 0
-    for (int i = 0; i < numOfVertices; i++)
-    {
-        dist[i] = std::numeric_limits<int>::max();
-    }
-    dist[startVal - 1] = 0;
-
-    // Loop through all vertices
-    for (int i = 0; i < numOfVertices - 1; i++)
-    {
-        // Find the vertex with the minimum distance value from the set of vertices not yet visited
-        int minDist = std::numeric_limits<int>::max();
-        int minIndex = -1;
-        for (int v = 0; v < numOfVertices; v++)
-        {
-            if (!visited[v] && dist[v] < minDist)
-            {
-                minDist = dist[v];
-                minIndex = v;
-            }
-        }
-
-        // Mark the picked vertex as visited
-        visited[minIndex] = true;
-
-        // Update dist value of the adjacent vertices of the picked vertex
-        for (int v = 0; v < numOfVertices; v++)
-        {
-            if (!visited[v] && *(matrix[minIndex * numOfVertices + v]) && dist[minIndex] != std::numeric_limits<int>::max() 
-            && dist[minIndex] + *(matrix[minIndex * numOfVertices + v]) < dist[v])
-            {
-                dist[v] = dist[minIndex] + *(matrix[minIndex * numOfVertices + v]);
-            }
-        }
-
-
-    for(int i = 0; i < numOfVertices; i++)
-    {
-        if(vDegrees[i] % 2 == 1)
-        {
-            // Input Dijkstra algorithm here for vDegrees[i], but print out for i + 1
-            // Print the shortest distances from startVal vertex to all other vertices
-            cout << "Single source shortest path lengths from node " << startVal << "\n";
-            cout << i + 1 << ": ";
-            if (dist[i] == std::numeric_limits<int>::max())
-            {
-                cout << std::numeric_limits<int>::max();
-            }
-            else
-            {
-                cout << dist[i];
-            }
-            cout << "\n";
-        }
-    }
-    }
-    cout << "\n";
-    
     return 0;
 }
